@@ -1,6 +1,8 @@
 package shop;
 
+import people.Client;
 import people.Manager;
+import people.Person;
 import people.Staff;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -15,6 +17,22 @@ public abstract class Shop {
         scanner = new Scanner(System.in);
     }
 
+
+    protected Person createPerson() {
+        //todo 具體功能
+        return new Person();
+    }
+
+    protected Staff createStaff() {
+        Person person = createPerson();
+        return new Staff(person.getID(), person.getName(), person.getBirthday(), person.getGender());
+    }
+
+    protected Client createClient() {
+        Person person = createPerson();
+        return new Client(person.getID(), person.getName(), person.getBirthday(), person.getGender());
+    }
+
     public boolean addStaff(Staff staff) {
         // todo 檢查員工身份
 
@@ -23,6 +41,14 @@ public abstract class Shop {
         return true;
     }
 
+    public boolean addStaff() {
+        return addStaff(createStaff());
+    }
+
+    public boolean deleteStaff(String id) {
+        //todo 刪除員工細節
+        return true;
+    }
     public abstract void runSystem();
 
     public String toString() {

@@ -2,7 +2,7 @@ package biology.animal;
 
 import java.util.Scanner;
 public abstract class Animal {
-    String name;
+    public String name;
 
     public int age;
 
@@ -18,6 +18,18 @@ public abstract class Animal {
         name = _name;
         age = _age;
         weight = _weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     public abstract void eat(int gram);

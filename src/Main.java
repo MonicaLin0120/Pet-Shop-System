@@ -24,7 +24,6 @@ public class Main {
         Animal animal03 = new Cat("Yu", 5, 4.5);
         petShop.addPet(animal03, 40000);
 
-
         petShop.runSystem();
     }
 }

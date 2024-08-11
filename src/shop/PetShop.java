@@ -2,6 +2,7 @@ package shop;
 import biology.animal.Animal;
 import biology.animal.Cat;
 import biology.animal.Dog;
+import biology.animal.Pet;
 import people.Manager;
 import people.Staff;
 import shop.Shop;
@@ -75,10 +76,12 @@ public class PetShop extends Shop {
                         System.out.println(toString());
                         break;
                     case 2:
-                        System.out.println("招聘員工");
+                        System.out.println("輸入新進員工的資訊：");
+                        addStaff();
                         break;
                     case 3:
-                        System.out.println("開除員工");
+                        System.out.println("輸入離職員工的ID");
+                        deleteStaff(scanner.next());
                         break;
                     case 4:
                         addPet();
@@ -116,10 +119,17 @@ public class PetShop extends Shop {
                         break;
                     case 2:
                         System.out.println("寵物餵食");
+                        for (Animal pet : petList) {
+                            System.out.print(pet.name + "的餵食飼料公克數：");
+                            pet.eat(scanner.nextInt());
+                        }
                         break;
                     case 3:
-                        System.out.println("寵物放風");
-                        break;
+                        for (Animal pet : petList) {
+                            System.out.print(pet.name + "的放風時間數：");
+                            ((Pet)pet).play(scanner.nextInt());
+
+                        }
                     case 4:
                         useSystemFlag = false;
                         break;
@@ -170,16 +180,17 @@ public class PetShop extends Shop {
     }
 
     public void addPet() {
-
         boolean isInputCorrect = false;
-        int input_value_01 = -1;
+        String category = "";
         do {
-            System.out.println("是否添加新的動物到系統中(0為不需要，1是貓咪，2是狗):");
-            input_value_01 = scanner.nextInt();
+            System.out.println("輸入物種[Cat/Dog]或取消[None]：");
+            category = scanner.next();
 
-            if (input_value_01 == 0)
-                return;
-            else if (input_value_01 >= 1 && input_value_01 <= 2)
+            if (category.equals("None")) {
+                isInputCorrect = false;
+                break;
+            }
+            else if (category.equals("Cat") && category.equals("dogs"))
                 isInputCorrect = true;
             else {
                 System.out.println("輸入值不正確");
@@ -197,14 +208,12 @@ public class PetShop extends Shop {
         double weight = scanner.nextDouble();
 
         Animal newAnimal;
-        switch (input_value_01) {
-            case 0:
-                break;
-            case 1:
+        switch (category) {
+            case "Cat":
                 newAnimal = new Cat(name, age, weight);//建立貓咪物件
                 petList.add(newAnimal);
                 break;
-            case 2:
+            case "Dog":
                 newAnimal = new Dog(name, age, weight);//建立狗狗物件
                 petList.add(newAnimal);
                 break;
