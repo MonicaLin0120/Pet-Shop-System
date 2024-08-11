@@ -7,7 +7,7 @@ public class Manager extends Person {
         stockPercentage = 0;
     }
 
-    public Manager(String id, String name, int[] birthday, String gender) {
+    public Manager(String id, String name, int[] birthday, Gender gender) {
         super(id,name,birthday,gender);
         stockPercentage = 100.0;
     }

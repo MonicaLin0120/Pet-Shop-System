@@ -8,12 +8,12 @@ public class Staff extends Person {
         salary = 0;
     }
 
-    public Staff(String id, String name, int[] birthday, String gender) {
+    public Staff(String id, String name, int[] birthday, Gender gender) {
         super(id, name, birthday, gender);
         salary = 40000 + (int)(20000.0 * Math.random()); //薪水區間40000~60000，Math.random()隨機給值0.0~1.0
     }
 
-    public Staff(String id, String name, int[] birthday, String gender, int salary) {
+    public Staff(String id, String name, int[] birthday, Gender gender, int salary) {
         super(id,name,birthday,gender);
         this.salary = salary;
     }

@@ -4,16 +4,16 @@ public class Person {
     protected String id;
     protected String name;
     protected int[] birthday;
-    protected String gender;
+    protected Gender gender;
 
     public Person(){
         this.id = "unknown";
         this.name = "unknown";
         this.birthday = new int[]{9999, 9999, 9999};
-        this.gender = "unknown";
+        this.gender = Gender.Unknown;
     }
 
-    public Person(String id, String name, int[] birthday, String gender){
+    public Person(String id, String name, int[] birthday, Gender gender){
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -32,7 +32,7 @@ public class Person {
         return birthday;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 

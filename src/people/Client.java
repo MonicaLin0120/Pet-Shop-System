@@ -15,7 +15,7 @@ public class Client extends Person {
         petList = new ArrayList<>();
     }
 
-    public Client(String id, String name, int[] birthday, String gender) {
+    public Client(String id, String name, int[] birthday, Gender gender) {
         super(id, name, birthday, gender);
         balance = (int)(1000000.0 * Math.random());
         petList = new ArrayList<>();

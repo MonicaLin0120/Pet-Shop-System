@@ -7,13 +7,13 @@ import shop.PetShop;
 public class Main {
     public static void main(String[] args) {
 
-        Manager manager = new Manager("001", "Jenny", new int[]{1995, 1, 15}, "Female");
+        Manager manager = new Manager("001", "Jenny", new int[]{1995, 1, 15}, Gender.Female);
         PetShop petShop = new PetShop(manager, 100);
 
         // 加入員工
-        Staff staff01 = new Staff("002", "Alice", new int[]{1999,10, 15}, "Female");
+        Staff staff01 = new Staff("002", "Alice", new int[]{1999,10, 15}, Gender.Female);
         petShop.addStaff(staff01);
-        Staff staff02 = new Staff("003", "Curry", new int[]{1998, 12, 18}, "Male");
+        Staff staff02 = new Staff("003", "Curry", new int[]{1998, 12, 18}, Gender.Male);
         petShop.addStaff(staff02);
 
         // todo 加入動物
