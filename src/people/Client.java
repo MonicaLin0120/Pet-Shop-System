@@ -21,10 +21,31 @@ public class Client extends Person {
         petList = new ArrayList<>();
     }
 
+    public boolean pay(int amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            return true;
+        }
+        else {
+            System.out.println(getName() + "存款不足！");
+            return false;
+        }
+    }
+
+    public void addPet(Animal newPet) {
+        petList.add(newPet);
+    }
+
     @Override
     public String toString() {
-        //todo 選擇性再印出petList跟balance
-        return super.toString();
+        String str = "";
+        str += super.toString() + ", balance = " + balance + "\n";
+
+        for (int i = 0; i < petList.size(); i++) {
+            str += "Pet " + (i + 1) + " is { " + "}" + petList.get(i).toString() + "}";
+        }
+
+        return str;
     }
 
 

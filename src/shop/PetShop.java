@@ -3,21 +3,26 @@ import biology.animal.Animal;
 import biology.animal.Cat;
 import biology.animal.Dog;
 import biology.animal.Pet;
+import people.Client;
 import people.Manager;
 import people.Staff;
 import shop.Shop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 public class PetShop extends Shop {
     private int petCapacity;
     private ArrayList<Animal> petList;
+
+    private HashMap<Animal, Integer> petPrice;
 
     public PetShop(Manager manager, int petCapacity){
         super(manager);
 
         this.petCapacity = petCapacity;
         this.petList = new ArrayList<>();
+        this.petPrice = new HashMap<>();
     }
 
     public void runSystem() {
@@ -26,7 +31,7 @@ public class PetShop extends Shop {
 
         MainLoop: while(true){
 
-            System.out.println("請登入寵物系統： ");
+            System.out.print("請登入寵物系統： ");
             String id = scanner.next();
 
             switch(VarifyID(id)) { //todo 驗證id
@@ -59,7 +64,8 @@ public class PetShop extends Shop {
             if (id.equals(staff.getID()))
                 return User.Staff;
 
-        return User.Unknown;
+
+        return User.Client;
     }
 
     public boolean managerDoSomething() {
@@ -148,6 +154,7 @@ public class PetShop extends Shop {
 
     public void clientDoSomething() {
         boolean useSystemFlag = true;
+        Client client = createClient();
 
         while (useSystemFlag) {
             System.out.print("操作選項［1.查看商店目錄 2.查看個人訊息 3.購買寵物 4.登出系統]: ");
@@ -155,13 +162,33 @@ public class PetShop extends Shop {
             try {
                 switch (scanner.nextInt()) {
                     case 1:
-                        System.out.println("查看商店目錄");
+                        for (int i = 0; i < petList.size(); i++) {
+                            System.out.println("No. " + (i + 1) + " : " + petList.get(i).toString() + ", Price = " + petPrice.get(petList.get(i)));
+                        }
                         break;
                     case 2:
-                        System.out.println("查看個人訊息");
+                        System.out.println(client.toString());
                         break;
                     case 3:
-                        System.out.println("購買寵物");
+                        System.out.print("輸入期望寵物的名稱：");
+                        String name = scanner.next();
+
+                        for (Animal pet : petList) {
+                            if (name.equals(pet.getName())) {
+                                if (client.pay(petPrice.get(pet))) {
+                                    System.out.println("交易成功！");
+                                    client.addPet(pet);
+                                    deletePet(name);
+                                }
+                                else {
+                                    System.out.println("交易失敗！");
+                                }
+                                break;
+                            }
+                        }
+
+                        client.addPet(petList.get(0));
+
                         break;
                     case 4:
                         useSystemFlag = false;
@@ -221,13 +248,23 @@ public class PetShop extends Shop {
     }
 
     public void addPet(Animal pet, int price) {
-        if (petList.size() < petCapacity)
+        if (petList.size() < petCapacity) {
             petList.add(pet);
+            petPrice.put(pet, price);
+        }
         else {
             System.out.println("寵物商店空間已滿，無法新增寵物。");
         }
     }
 
+    public void deletePet(String name) {
+        for (int i = 0; i < petList.size(); i++) {
+            if(name.equals(petList.get(i).getName())) {
+                petList.remove(i);
+                break;
+            }
+        }
+    }
     @Override
     public String toString() {
         String str = "";
@@ -235,7 +272,7 @@ public class PetShop extends Shop {
         str += super.toString();
 
         for (int i = 0; i < petList.size(); i++) {
-            str += "Pet " + (i + 1) + " is {" + petList.get(i).toString() + " }\n";
+            str += "Pet " + (i + 1) + " is {" + petList.get(i).toString() + ", Price = " + petPrice.get(petList.get(i)) + "}\n";
         }
 
         str += "寵物訊息";

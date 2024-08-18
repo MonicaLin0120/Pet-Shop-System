@@ -18,15 +18,15 @@ public abstract class Shop {
 
     protected Person createPerson() {
         //todo 具體功能
-        System.out.println("輸入ID: ");
+        System.out.print("輸入ID: ");
         String id = scanner.next();
 
-        System.out.println("輸入姓名: ");
+        System.out.print("輸入姓名: ");
         String name = scanner.next();
 
         int year;
         while(true) {
-            System.out.println("輸入出生年: ");
+            System.out.print("輸入出生年: ");
             year = scanner.nextInt();
             if(year >= 1900 && year <= 2100)
                 break;
@@ -36,7 +36,7 @@ public abstract class Shop {
 
         int month;
         while(true) {
-            System.out.println("請輸入出生月: ");
+            System.out.print("請輸入出生月: ");
             month = scanner.nextInt();
             if(month >= 1 && month <= 12)
                 break;
@@ -46,7 +46,7 @@ public abstract class Shop {
 
         int day;
         while(true) {
-            System.out.println("請輸入出生日: ");
+            System.out.print("請輸入出生日: ");
             day = scanner.nextInt();
             if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
                 if (day >= 1 && day <= 31)
@@ -69,7 +69,7 @@ public abstract class Shop {
 
         Gender gender;
         while (true) {
-            System.out.println("輸入性別: ");
+            System.out.print("輸入性別: ");
             String gender_str = scanner.next();
             if (gender_str.equalsIgnoreCase("Female") || gender_str.equalsIgnoreCase("F")) {
                 gender = Gender.Female;
