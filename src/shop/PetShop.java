@@ -1,8 +1,5 @@
 package shop;
-import biology.animal.Animal;
-import biology.animal.Cat;
-import biology.animal.Dog;
-import biology.animal.Pet;
+import biology.animal.*;
 import people.Client;
 import people.Manager;
 import people.Staff;
@@ -210,41 +207,49 @@ public class PetShop extends Shop {
         boolean isInputCorrect = false;
         String category = "";
         do {
-            System.out.println("輸入物種[Cat/Dog]或取消[None]：");
+            System.out.println("輸入物種[Cat/Dog/Rabbit]或取消[None]：");
             category = scanner.next();
 
             if (category.equals("None")) {
                 isInputCorrect = false;
                 break;
             }
-            else if (category.equals("Cat") && category.equals("dogs"))
+            else if (category.equals("Cat") || category.equals("Dog") || category.equals("Rabbit")) {
+                System.out.print("輸入名稱：");
+                String name = scanner.next();
+
+                System.out.print("輸入年紀：");
+                int age = scanner.nextInt();
+
+                System.out.print("輸入體重(kg)：");
+                double weight = scanner.nextDouble();
+
+                System.out.println("輸入售價：");
+                int price = scanner.nextInt();
+
+                Animal newAnimal = null;
+                switch (category) {
+                    case "Cat":
+                        newAnimal = new Cat(name, age, weight);//建立貓咪物件
+                        petList.add(newAnimal);
+                        break;
+                    case "Dog":
+                        newAnimal = new Dog(name, age, weight);//建立狗狗物件
+                        petList.add(newAnimal);
+                        break;
+                    case "Rabbit":
+                        newAnimal = new Rabbit(name, age, weight);
+                        petList.add(newAnimal);
+                        break;
+                }
+                addPet(newAnimal, price);
+
                 isInputCorrect = true;
+            }
             else {
                 System.out.println("輸入值不正確");
             }
         } while(!isInputCorrect);
-
-
-        System.out.print("輸入名稱：");
-        String name = scanner.next();
-
-        System.out.print("輸入年紀：");
-        int age = scanner.nextInt();
-
-        System.out.print("輸入體重(kg)：");
-        double weight = scanner.nextDouble();
-
-        Animal newAnimal;
-        switch (category) {
-            case "Cat":
-                newAnimal = new Cat(name, age, weight);//建立貓咪物件
-                petList.add(newAnimal);
-                break;
-            case "Dog":
-                newAnimal = new Dog(name, age, weight);//建立狗狗物件
-                petList.add(newAnimal);
-                break;
-        }
     }
 
     public void addPet(Animal pet, int price) {

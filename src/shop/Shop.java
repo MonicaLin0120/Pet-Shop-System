@@ -17,7 +17,6 @@ public abstract class Shop {
 
 
     protected Person createPerson() {
-        //todo 具體功能
         System.out.print("輸入ID: ");
         String id = scanner.next();
 
@@ -98,10 +97,14 @@ public abstract class Shop {
         return new Client(person.getID(), person.getName(), person.getBirthday(), person.getGender());
     }
 
-    public boolean addStaff(Staff staff) {
-        // todo 檢查員工身份
-
-        staffList.add(staff);
+    public boolean addStaff(Staff newStaff) {
+        for (Staff staff : staffList) {
+            if (newStaff.getID().equals(staff.getID())) {
+                System.out.println("ID重複！添加員工失敗！");
+                return false;
+            }
+        }
+        staffList.add(newStaff);
 
         return true;
     }

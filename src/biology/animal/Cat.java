@@ -7,13 +7,11 @@ public class Cat extends Mammal implements Pet {
     public Cat(){
         super();
     }
-    public Cat(String _name, int _age, double _weight) {
-        super(_name, _age, _weight);
-    }
+    public Cat(String _name, int _age, double _weight) { super(_name, _age, _weight);}
 
     public void eat(int gram) {
-        if (gram> 500)
-            weight +=0.1;
+        if (gram > 500)
+            weight += 0.1;
     }
 
     public void play(int min) {

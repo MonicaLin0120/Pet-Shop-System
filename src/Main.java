@@ -16,7 +16,6 @@ public class Main {
         Staff staff02 = new Staff("003", "Curry", new int[]{1998, 12, 18}, Gender.Male);
         petShop.addStaff(staff02);
 
-        // todo 加入動物
         Animal animal01 = new Cat("Kitty", 1, 1.5);
         petShop.addPet(animal01, 30000);
         Animal animal02 = new Dog("Den", 3, 6.5);
